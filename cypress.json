@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://www.brickblock.io",
+  "___comment": "false because of the error when user successfully submits navigation form https://screencast.com/t/ZKkUV2UtHg",
+  "chromeWebSecurity": false
+}
+
