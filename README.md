@@ -13,13 +13,13 @@
 1. Clone the repository 
 > https://github.com/zhenyaevgeniia/brickblock-challenge-evgeniia
 2. Go to local repository in terminal
->cd /your/project/path
-3. Run
->npm install cypress --save-dev
+  >cd /your/project/path
+3. Install all dependencies 
+>npm install
 
 ### Running the tests
 
-_From console:_
+_With terminal from project folder_
 
 Run all tests together
 >node_modules/.bin/cypress run
@@ -30,7 +30,7 @@ Run specific tests
 _In Cypress Test Runner:_
 
 1. Open Test runner 
-> npx cypress open
+> npm cypress open
 
 2. Click on test suite from the list or "Run all tests"
 
