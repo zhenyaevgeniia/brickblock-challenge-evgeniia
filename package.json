@@ -1,0 +1,23 @@
+{
+  "name": "brickblock",
+  "version": "1.0.0",
+  "description": "challenge",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^2.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhenyaevgeniia/brickblock-challenge-evgeniia.git"
+  },
+  "author": "Evgeniia Balyasina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhenyaevgeniia/brickblock-challenge-evgeniia/issues"
+  },
+  "homepage": "https://github.com/zhenyaevgeniia/brickblock-challenge-evgeniia#readme"
+}
