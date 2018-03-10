@@ -1,19 +1,18 @@
 //the number depends on the environment where tests are running and database state
 //Ex. if tests running with local empty DB, there is no need of 10000
-
 const random_number = Cypress._.random(0, 10000)
-const signup_url = '/signup.html'
+//would be great to store in configuration files
+const signup_partUrl = '/signup.html'
 const subscribe_partUrl = '/subscribe/post?u='
 
 describe('Submit to newsletter form', function () {
 
     beforeEach(function () {
-        cy.visit(signup_url)
-        //ideally should be stored in PageObjects
+        cy.visit(signup_partUrl)
+        //ideally should be stored in PageObjects or other alternative way, ex. commands
         cy.get('#input01').as('email_input')
         cy.get('[name=subscribe]').as('subscribe_btn')
     })
-
 
     it('redirects to page with error message when email is invalid', function () {
         //meaningful id would be better
@@ -21,7 +20,7 @@ describe('Submit to newsletter form', function () {
         cy.get('@email_input').type('test@gmail.com')
         cy.get('@subscribe_btn').click()
         cy.url()
-            .should('not.include', signup_url)
+            .should('not.include', signup_partUrl)
             .and('include', subscribe_partUrl)
         cy.get('.formstatus')
             .should('contain', 'There are errors below')
@@ -31,7 +30,7 @@ describe('Submit to newsletter form', function () {
         cy.get('@email_input').type('evgeniia.balyasina' + random_number + '@gmail.com')
         cy.get('@subscribe_btn').click()
         cy.url()
-            .should('not.include', signup_url)
+            .should('not.include', signup_partUrl)
             .and('include', subscribe_partUrl)
         cy.get('h2')
             .should('contain', 'Subscription Confirmed')
