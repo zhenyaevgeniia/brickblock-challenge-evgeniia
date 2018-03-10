@@ -1,32 +1,39 @@
 //the number depends on the environment where tests are running and database state
 //Ex. if tests running with local empty DB, there is no need of 10000
+
 const random_number = Cypress._.random(0, 10000)
+const signup_url = '/signup.html'
+const subscribe_partUrl = '/subscribe/post?u='
 
 describe('Submit to newsletter form', function () {
 
     beforeEach(function () {
-        const signup_url = '/signup.html'
         cy.visit(signup_url)
+        //ideally should be stored in PageObjects
+        cy.get('#input01').as('email_input')
+        cy.get('[name=subscribe]').as('subscribe_btn')
     })
 
 
-    it('shows error message when email is invalid', function () {
+    it('redirects to page with error message when email is invalid', function () {
         //meaningful id would be better
         //email validation is implemented by browser https://screencast.com/t/CegGQAHE
-        cy.get('#input01').type('test@gmail.com')
-        cy.contains('GO!').click()
+        cy.get('@email_input').type('test@gmail.com')
+        cy.get('@subscribe_btn').click()
         cy.url()
-            .should('not.include', '/signup.html')
+            .should('not.include', signup_url)
+            .and('include', subscribe_partUrl)
         cy.get('.formstatus')
             .should('contain', 'There are errors below')
     })
 
-    it('successfully when email is valid', function () {
-        cy.get('#input01').type('evgeniia.balyasina' + random_number + '@gmail.com')
-        cy.contains('GO!').click()
+    it('redirects to page with success message when email is valid', function () {
+        cy.get('@email_input').type('evgeniia.balyasina' + random_number + '@gmail.com')
+        cy.get('@subscribe_btn').click()
         cy.url()
-            .should('include', '/subscribe/post?u=')
-        cy.get('#templateBody')
+            .should('not.include', signup_url)
+            .and('include', subscribe_partUrl)
+        cy.get('h2')
             .should('contain', 'Subscription Confirmed')
     })
 })
